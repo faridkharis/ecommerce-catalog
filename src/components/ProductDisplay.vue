@@ -1,6 +1,5 @@
 <template>
   <div v-if="isLoading" class="container">
-    {{ console.log(isLoading) }}
     <div class="product__container">
       <div class="product__image skeleton">image</div>
       <div class="product__content">
@@ -23,7 +22,16 @@
   </div>
   <div v-else class="container">
     {{ console.log(data.product) }}
-    <div class="product__container">
+    <div v-if="!isProductAvailable" class="unavailable__container">
+      {{ console.log(isProductAvailable) }}
+      <img src="../assets/image/sad-face.png" class="unavailable__img">
+      <div class="unavailable__content">
+        <p class="unavailable__text">This product is unavailable to show</p>
+        <button class="unavailable-button" @click="getProductById()">Next Product</button>
+      </div>
+    </div>
+    <div v-else class="product__container">
+      {{ console.log(isProductAvailable) }}
       <img :src="data.product.image" class="product__image" alt="product-image" />
       <div class="product__content">
         <div>
@@ -62,9 +70,10 @@ export default {
   name: 'ProductDisplay',
   data () {
     return {
-      isLoading: false,
+      data: {},
       index: 0,
-      data: {}
+      isLoading: false,
+      isProductAvailable: false
     }
   },
   methods: {
@@ -80,7 +89,13 @@ export default {
 
       let product = await this.callAPI();
 
-      this.data = { product }
+      this.data = { product };
+
+      if(product.category === "men's clothing" || product.category === "women's clothing") {
+        this.isProductAvailable = true;
+      } else {
+        this.isProductAvailable = false;
+      }
 
       this.isLoading = false;
     },
