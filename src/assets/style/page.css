@@ -1,0 +1,124 @@
+/* Base */
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+:root {
+  --blue: #002772;
+  --light-blue: #D6E6FF;
+  --light-magenta: #720060;
+  --light-magenta: #FDE2FF;
+  --black: #1E1E1E;
+  --dark-grey: #3F3F3F;
+  --light-grey: #DCDCDC;
+  --white: #FFFFFF;
+}
+
+hr {
+  margin: 20px 0;
+  border: 1px solid var(--light-grey);
+}
+
+button {
+  cursor: pointer;
+  outline: none;
+  border-radius: 4px;
+  padding: 9px;
+  width: 100%;
+  font-size: 20px;
+}
+
+.container {
+  height: 100vh;
+  width: 100vw;
+  background-image: url("../image/pattern.svg"), linear-gradient(var(--light-blue) 65%, var(--white) 35%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.product__container {
+  background-color: var(--white);
+  height: 80%;
+  width: 80%;
+  border-radius: 10px;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  display: flex;
+  padding: 60px;
+  column-gap: 40px;
+}
+
+.product__image {
+  margin: 20px auto 20px auto;
+  max-width: 40%;
+}
+
+.product__content {
+  width: 55%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.product__title {
+  color: var(--blue);
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.product__category {
+  color: var(--dark-grey);
+  font-weight: 400;
+}
+
+.product__rating {
+  display: flex;
+  align-items: center;
+  column-gap: 2px;
+}
+
+.dot {
+  height: 25px;
+  width: 25px;
+  background-color: var(--blue);
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.product__description {
+  color: var(--black);
+  font-weight: 400;
+  font-size: 20px;
+}
+
+.product__price {
+  color: var(--blue);
+  font-weight: 600;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.product__action {
+  display: flex;
+  justify-content: space-between;
+  column-gap: 20px;
+}
+
+.primary-button {
+  background-color: var(--blue);
+  color: var(--white);
+  font-weight: 600;
+  border: none;
+  
+}
+
+.secondary-button {
+  background-color: var(--white);
+  color: var(--blue);
+  font-weight: 600;
+  border: 3px solid var(--blue);
+}

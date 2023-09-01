@@ -1,58 +1,67 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+  <div class="container">
+    <div class="product__container">
+      <img :src="data.product.image" class="product__image" alt="product-image" />
+      {{ console.log(data.product) }}
+      <div class="product__content">
+        <div>
+          <h3 class="product__title">{{ data.product.title }}</h3>
+          <div style="display: flex; justify-content: space-between; align-items: center; font-size: 18px;">
+            <p class="product__category">{{ data.product.category }}</p>
+            <div class="product__rating">
+              <span>{{ data.product.rating.rate }}</span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
+          </div>
+          <hr>
+          <p class="product__description">{{ data.product.description }}</p>
+        </div>
+        <div>
+          <hr>
+          <p class="product__price">${{ data.product.price }}</p>
+          <div class="product__action">
+            <button class="primary-button">Buy Now</button>
+            <button class="secondary-button" @click="getProductById()">Next Product</button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: 'ProductDisplay',
-  props: {
-    msg: String
+  data () {
+    return {
+      index: 0,
+      data: {}
+    }
+  },
+  methods: {
+    async callAPI() {
+      const response = await fetch(`https://fakestoreapi.com/products/${this.index}`);
+      const result = await response.json();
+
+      return result;
+    },
+    async getProductById() {
+      this.index == 20 ? (this.index = 1) : this.index++;
+
+      let product = await this.callAPI();
+
+      this.data = { product }
+    },
+  },
+  created() {
+    this.getProductById();
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+<style>
+@import '../assets/style/page.css';
 </style>
