@@ -20,10 +20,18 @@
       </div>
     </div>
   </div>
-  <div v-else class="container">
-    {{ console.log(data.product) }}
+  <div 
+    v-else
+    class="container"
+    :class="
+      !isProductAvailable
+      ? 'bg-light-grey'
+      : data.product.category === 'men\'s clothing'
+      ? 'bg-light-blue font-blue'
+      : 'bg-light-magenta font-magenta'
+    "
+  >
     <div v-if="!isProductAvailable" class="unavailable__container">
-      {{ console.log(isProductAvailable) }}
       <img src="../assets/image/sad-face.png" class="unavailable__img">
       <div class="unavailable__content">
         <p class="unavailable__text">This product is unavailable to show</p>
@@ -31,7 +39,6 @@
       </div>
     </div>
     <div v-else class="product__container">
-      {{ console.log(isProductAvailable) }}
       <img :src="data.product.image" class="product__image" alt="product-image" />
       <div class="product__content">
         <div>
@@ -40,12 +47,13 @@
             <p class="product__category">{{ data.product.category }}</p>
             <div class="product__rating">
               <span>{{ data.product.rating.rate }}</span>
-              <div>
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
+              {{ console.log(typeof(data.product.rating.rate)) }}
+              <div class="dots">
+                <span class="dot" :class="data.product.category === 'men\'s clothing' ? 'dot-blue' : 'dot-magenta'"></span>
+                <span class="dot" :class="data.product.category === 'men\'s clothing' ? 'dot-blue' : 'dot-magenta'"></span>
+                <span class="dot" :class="data.product.category === 'men\'s clothing' ? 'dot-blue' : 'dot-magenta'"></span>
+                <span class="dot" :class="data.product.category === 'men\'s clothing' ? 'dot-blue' : 'dot-magenta'"></span>
+                <span class="dot" :class="data.product.category === 'men\'s clothing' ? 'dot-blue' : 'dot-magenta'"></span>
               </div>
             </div>
           </div>
@@ -56,8 +64,19 @@
           <hr>
           <p class="product__price">${{ data.product.price }}</p>
           <div class="product__action">
-            <button class="primary-button">Buy Now</button>
-            <button class="secondary-button" @click="getProductById()">Next Product</button>
+            <button 
+              class="primary-button" 
+              :class="data.product.category === 'men\'s clothing' ? 'primary-btn-blue' : 'primary-btn-magenta'"
+            >
+              Buy Now
+            </button>
+            <button 
+              class="secondary-button" 
+              :class="data.product.category === 'men\'s clothing' ? 'secondary-btn-blue' : 'secondary-btn-magenta'"
+              @click="getProductById()"
+            >
+              Next Product
+            </button>
           </div>
         </div>
       </div>
@@ -89,14 +108,12 @@ export default {
 
       let product = await this.callAPI();
 
-      this.data = { product };
-
       if(product.category === "men's clothing" || product.category === "women's clothing") {
+        this.data = { product };
         this.isProductAvailable = true;
       } else {
         this.isProductAvailable = false;
       }
-
       this.isLoading = false;
     },
   },
