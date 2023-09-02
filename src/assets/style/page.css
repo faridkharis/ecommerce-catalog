@@ -117,19 +117,19 @@ button {
 }
 
 .dot {
-  /* background-color: var(--dark-grey); */
   height: 20px;
   width: 20px;
   border-radius: 50%;
   display: inline-block;
   margin-left: 2px;
+  background-color: var(--light-grey);
 }
 
-.dot-blue /* .active */ {
+.dot-blue {
   background-color: var(--blue);
 }
 
-.dot-magenta /* .active */ {
+.dot-magenta {
   background-color: var(--magenta);
 }
 

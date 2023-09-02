@@ -47,13 +47,17 @@
             <p class="product__category">{{ data.product.category }}</p>
             <div class="product__rating">
               <span>{{ data.product.rating.rate }}</span>
-              {{ console.log(typeof(data.product.rating.rate)) }}
               <div class="dots">
-                <span class="dot" :class="data.product.category === 'men\'s clothing' ? 'dot-blue' : 'dot-magenta'"></span>
-                <span class="dot" :class="data.product.category === 'men\'s clothing' ? 'dot-blue' : 'dot-magenta'"></span>
-                <span class="dot" :class="data.product.category === 'men\'s clothing' ? 'dot-blue' : 'dot-magenta'"></span>
-                <span class="dot" :class="data.product.category === 'men\'s clothing' ? 'dot-blue' : 'dot-magenta'"></span>
-                <span class="dot" :class="data.product.category === 'men\'s clothing' ? 'dot-blue' : 'dot-magenta'"></span>
+                <span 
+                  v-for="dot in 5"
+                  :key="dot"
+                  :class="
+                    data.product.category === 'men\'s clothing'
+                    ? ['dot', { 'dot-blue': dot <= Math.round(data.product.rating.rate) }]
+                    : ['dot', { 'dot-magenta': dot <= Math.round(data.product.rating.rate) }]
+                  "
+                >
+                </span>
               </div>
             </div>
           </div>
