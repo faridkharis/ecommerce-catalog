@@ -1,5 +1,10 @@
 # ecommerce
 
+## Project link
+```
+https://ecommerce-faridkharis.netlify.app/
+```
+
 ## Project setup
 ```
 npm install
