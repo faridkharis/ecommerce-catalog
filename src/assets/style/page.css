@@ -91,7 +91,7 @@ button {
 .product__title {
   font-size: 28px;
   font-weight: 600;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   overflow-y: hidden;
   text-overflow: ellipsis;
   max-height: 75px;
@@ -137,7 +137,7 @@ button {
   color: var(--black);
   font-weight: 400;
   font-size: 20px;
-  height: 150px;
+  height: 120px;
   overflow-y: hidden;
   text-overflow: ellipsis;
 }
